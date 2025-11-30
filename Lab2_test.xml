@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<FacultySports facultyName="ФІОТ">
+  <Section name="Волейбол" coach="Іванов І.І." schedule="Пн, Ср 18:00">
+    <Participant type="Студент" fullName="Дмитренко Дмитро" group="К-25" rank="Аматор" hasMedicalCert="true" />
+    <Participant type="Студент" fullName="Петренко Петро" group="К-26" rank="Аматор" />
+    <Participant type="Викладач" fullName="Сидоров С.С." position="Доцент" />
+    <Participant type="Студент" fullName="Козлова Марія" group="К-27" rank="Початківець" />
+  </Section>
+  <Section name="Футбол" coach="Шевченко А.М." schedule="Вт, Чт 17:00">
+    <Participant type="Студент" fullName="Коваленко Анна" group="К-27" rank="Професіонал" goalsScored="5" />
+    <Participant type="Студент" fullName="Бондар Олег" group="К-27" position="Воротар" />
+    <Participant type="Студент" fullName="Литвиненко Сергій" group="К-25" goalsScored="12" />
+    <Participant type="Викладач" fullName="Романенко В.В." position="Професор" />
+  </Section>
+  <Section name="Баскетбол" coach="Козак В.В." schedule="Пт 19:00">
+    <Participant type="Студент" fullName="Мельник Ірина" group="К-26" height="190" />
+    <Participant type="Студент" fullName="Бойко Андрій" group="К-25" rank="КМС" />
+    <Participant type="Викладач" fullName="Гнатюк О.П." position="Старший викладач" />
+  </Section>
+  <Section name="Шахи" coach="Карпов Г.К." schedule="Сб 12:00">
+    <Participant type="Студент" fullName="Савченко Олег" group="К-27" rank="Майстер спорту" />
+    <Participant type="Студент" fullName="Ткаченко Юлія" group="К-26" rank="1 розряд" />
+  </Section>
+  <CompetitionPlan year="2024">
+    <Event name="Кубок Факультету" date="2024-10-20" type="Внутрішні" />
+    <Event name="Університетський Чемпіонат" date="2024-11-15" type="Зовнішні" prizeFund="5000" />
+    <Event name="Різдвяний Турнір" date="2024-12-25" type="Внутрішні" location="Спорткомплекс КПІ" />
+    <Event name="Весняна Спартакіада" date="2025-04-10" type="Зовнішні" />
+  </CompetitionPlan>
+</FacultySports>
