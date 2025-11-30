@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Lab2_oop.ViewModels"
+             xmlns:models="clr-namespace:Lab2_oop.Models"
+             x:Class="Lab2_oop.MainPage"
+             Title="Лабораторна 2 - Спорт"
+             BackgroundColor="#F3F2F1">
+
+    <ContentPage.BindingContext>
+        <vm:MainViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="BackgroundColor" Value="#217346"/>
+            <Setter Property="HeightRequest" Value="55"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="#000000"/>
+            <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        </Style>
+
+        <Style TargetType="Border">
+            <Setter Property="StrokeShape" Value="RoundRectangle 6"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="Stroke" Value="#D4D4D4"/>
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="Padding" Value="15"/>
+        </Style>
+
+        <Style TargetType="Entry">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="TextColor" Value="#000000"/>
+            <Setter Property="PlaceholderColor" Value="#666666"/>
+            <Setter Property="HeightRequest" Value="50"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+
+        <Style TargetType="Picker">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="TextColor" Value="#000000"/>
+            <Setter Property="TitleColor" Value="#666666"/>
+            <Setter Property="HeightRequest" Value="70"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto, Auto, *" RowSpacing="0">
+
+        <Grid Grid.Row="0" BackgroundColor="#217346" Padding="20,15">
+            <Label Text="Спорт на факультеті" 
+                   FontSize="26" 
+                   FontAttributes="Bold" 
+                   TextColor="White"
+                   VerticalOptions="Center"/>
+        </Grid>
+
+        <ScrollView Grid.Row="1" Grid.RowSpan="2" Padding="15">
+            <VerticalStackLayout Spacing="20">
+
+                <Border Stroke="#D4D4D4" StrokeThickness="1" BackgroundColor="White" Padding="15" StrokeShape="RoundRectangle 6">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="Джерело даних" FontSize="18" FontAttributes="Bold" TextColor="#217346"/>
+
+                        <Grid ColumnDefinitions="*, *" ColumnSpacing="15">
+                            <Button Text="Завантажити XML" 
+                                    Command="{Binding LoadFileCommand}" 
+                                    BackgroundColor="#217346" 
+                                    TextColor="White"
+                                    FontAttributes="Bold"
+                                    Grid.Column="0"/>
+
+                            <Border Grid.Column="1" Stroke="#A0A0A0" StrokeThickness="1" BackgroundColor="#F9F9F9" Padding="2">
+                                <Picker ItemsSource="{Binding AnalyzersList}" 
+                                        SelectedItem="{Binding SelectedAnalyzerName}" 
+                                        Title="Метод аналізу"
+                                        TextColor="Black" 
+                                        TitleColor="#555555"
+                                        BackgroundColor="Transparent"
+                                        VerticalOptions="Center"/>
+                            </Border>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Stroke="#D4D4D4" StrokeThickness="1" BackgroundColor="White" Padding="15" StrokeShape="RoundRectangle 6">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="Фільтрація та Пошук" FontSize="18" FontAttributes="Bold" TextColor="#217346"/>
+
+                        <Border Stroke="#A0A0A0" StrokeThickness="1" BackgroundColor="White" Padding="10,0">
+                            <Entry Placeholder="Пошук (Ім'я, Секція, Тренер)..." 
+                                   Text="{Binding SearchKeyword}"
+                                   TextColor="Black"
+                                   PlaceholderColor="#777777"
+                                   BackgroundColor="Transparent"
+                                   VerticalOptions="Center"
+                                   ClearButtonVisibility="WhileEditing"/>
+                        </Border>
+
+                        <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto" ColumnSpacing="15" RowSpacing="15">
+
+                            <Border Grid.Row="0" Grid.Column="0" Stroke="#A0A0A0" StrokeThickness="1" BackgroundColor="#F9F9F9" Padding="2">
+                                <Picker ItemsSource="{Binding Roles}" SelectedItem="{Binding SelectedRole}" Title="Роль" 
+                                        TextColor="Black" TitleColor="#555555" BackgroundColor="Transparent" VerticalOptions="Center"/>
+                            </Border>
+
+                            <Border Grid.Row="0" Grid.Column="1" Stroke="#A0A0A0" StrokeThickness="1" BackgroundColor="#F9F9F9" Padding="2">
+                                <Picker ItemsSource="{Binding Sections}" SelectedItem="{Binding SelectedSection}" Title="Секція" 
+                                        TextColor="Black" TitleColor="#555555" BackgroundColor="Transparent" VerticalOptions="Center"/>
+                            </Border>
+
+                            <Border Grid.Row="1" Grid.Column="0" Stroke="#A0A0A0" StrokeThickness="1" BackgroundColor="#F9F9F9" Padding="2">
+                                <Picker ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup}" Title="Група" 
+                                        TextColor="Black" TitleColor="#555555" BackgroundColor="Transparent" VerticalOptions="Center"/>
+                            </Border>
+
+                            <Border Grid.Row="1" Grid.Column="1" Stroke="#A0A0A0" StrokeThickness="1" BackgroundColor="#F9F9F9" Padding="2">
+                                <Picker ItemsSource="{Binding Ranks}" SelectedItem="{Binding SelectedRank}" Title="Розряд" 
+                                        TextColor="Black" TitleColor="#555555" BackgroundColor="Transparent" VerticalOptions="Center"/>
+                            </Border>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*, *" ColumnSpacing="15" Margin="0,10,0,0">
+                            <Button Text="Знайти" Command="{Binding SearchCommand}" BackgroundColor="#217346" TextColor="White" Grid.Column="0"/>
+                            <Button Text="Очистити" Command="{Binding ClearCommand}" BackgroundColor="#A4373A" TextColor="White" Grid.Column="1"/>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Label Text="{Binding StatusMessage}" TextColor="#217346" FontAttributes="Italic" FontSize="14" Margin="5,0"/>
+
+                <Border Stroke="#CCCCCC" StrokeThickness="1" Padding="0" BackgroundColor="White">
+                    <StackLayout>
+                        <Grid ColumnDefinitions="2*, 2*, 1.8*, 3*, 1.5*, 2*" Padding="15" BackgroundColor="#217346">
+                            <Label Text="Секція" FontAttributes="Bold" FontSize="14" TextColor="White" Grid.Column="0"/>
+                            <Label Text="Тренер" FontAttributes="Bold" FontSize="14" TextColor="White" Grid.Column="1"/>
+                            <Label Text="Тип учасника" FontAttributes="Bold" FontSize="14" TextColor="White" Grid.Column="2"/>
+                            <Label Text="ПІБ" FontAttributes="Bold" FontSize="14" TextColor="White" Grid.Column="3"/>
+                            <Label Text="Розряд" FontAttributes="Bold" FontSize="14" TextColor="White" Grid.Column="4"/>
+                            <Label Text="Деталі" FontAttributes="Bold" FontSize="14" TextColor="White" Grid.Column="5"/>
+                        </Grid>
+
+                        <ScrollView HeightRequest="400">
+                            <StackLayout BindableLayout.ItemsSource="{Binding Results}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="models:MemberInfo">
+                                        <Grid ColumnDefinitions="2*, 2*, 1.8*, 3*, 1.5*, 2*" RowDefinitions="Auto, 1" Padding="15,12" BackgroundColor="White">
+                                            <Label Text="{Binding SectionName}" FontSize="13" TextColor="#333333" VerticalOptions="Center" Grid.Row="0" Grid.Column="0"/>
+                                            <Label Text="{Binding CoachName}" FontSize="13" TextColor="#333333" VerticalOptions="Center" Grid.Row="0" Grid.Column="1"/>
+                                            <Label Text="{Binding Role}" FontSize="13" TextColor="#333333" VerticalOptions="Center" Grid.Row="0" Grid.Column="2"/>
+                                            <Label Text="{Binding FullName}" FontSize="13" FontAttributes="Bold" TextColor="Black" VerticalOptions="Center" Grid.Row="0" Grid.Column="3"/>
+                                            <Label Text="{Binding Rank}" FontSize="13" TextColor="#333333" VerticalOptions="Center" Grid.Row="0" Grid.Column="4"/>
+                                            <Label Text="{Binding AdditionalInfo}" FontSize="13" TextColor="#333333" VerticalOptions="Center" Grid.Row="0" Grid.Column="5"/>
+
+                                            <BoxView Color="#E0E0E0" HeightRequest="1" Grid.Row="1" Grid.ColumnSpan="6" Margin="0,5,0,0"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                        </ScrollView>
+                    </StackLayout>
+                </Border>
+
+                <Grid ColumnDefinitions="*, *" ColumnSpacing="15" Margin="0,10,0,20">
+                    <Button Text="Звіт HTML" Command="{Binding TransformCommand}" BackgroundColor="#107C41" TextColor="White" Grid.Column="0"/>
+                    <Button Text="Вихід" Command="{Binding ExitCommand}" BackgroundColor="#666666" TextColor="White" Grid.Column="1"/>
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
